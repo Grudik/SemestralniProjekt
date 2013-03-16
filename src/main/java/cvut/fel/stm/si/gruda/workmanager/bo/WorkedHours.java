@@ -5,6 +5,7 @@
 package cvut.fel.stm.si.gruda.workmanager.bo;
 
 import java.util.Date;
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -13,7 +14,8 @@ import javax.persistence.TemporalType;
  *
  * @author Grudik-stolni
  */
-public class WorkedHours {
+@Entity
+public class WorkedHours extends AbstractBusinessObject {
     
     @Temporal(TemporalType.DATE)
     private Date startTime;

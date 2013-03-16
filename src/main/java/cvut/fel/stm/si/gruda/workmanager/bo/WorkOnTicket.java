@@ -4,6 +4,7 @@
  */
 package cvut.fel.stm.si.gruda.workmanager.bo;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 /**
@@ -11,7 +12,7 @@ import javax.persistence.ManyToOne;
  * @author Grudik-stolni
  */
 
-
+@Entity
 public class WorkOnTicket extends AbstractBusinessObject {
    private boolean owner;
    

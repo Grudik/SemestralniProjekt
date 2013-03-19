@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class WorkOnTicket extends AbstractBusinessObject {
-   private boolean owner;
+   private boolean ownerOfTicket;
    
    @ManyToOne
    private User user;
@@ -40,11 +40,11 @@ public class WorkOnTicket extends AbstractBusinessObject {
     }
 
     public boolean isOwner() {
-        return owner;
+        return ownerOfTicket;
     }
 
     public void setOwner(boolean owner) {
-        this.owner = owner;
+        this.ownerOfTicket = owner;
     }
    
    

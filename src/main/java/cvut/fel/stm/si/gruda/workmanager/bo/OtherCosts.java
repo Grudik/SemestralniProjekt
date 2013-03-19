@@ -40,7 +40,6 @@ public class OtherCosts extends AbstractBusinessObject {
     public void setProject(Project project) {
         this.project = project;
     }
-    
 
     public SettlingTime getSettlingTime() {
         return settlingTime;
@@ -89,7 +88,5 @@ public class OtherCosts extends AbstractBusinessObject {
     public void setNote(String note) {
         this.note = note;
     }
-    
-    
     
 }

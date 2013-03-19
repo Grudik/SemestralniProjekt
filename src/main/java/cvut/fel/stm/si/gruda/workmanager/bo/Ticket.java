@@ -16,11 +16,13 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Ticket extends AbstractBusinessObject {
-    @OneToMany(mappedBy = "parent")
-    private List<Ticket> tickets;
+    
     private String name;
     private String note;
     private int avegageTime;
+    
+    @OneToMany(mappedBy = "parent")
+    private List<Ticket> tickets;
     
     @OneToMany(mappedBy = "ticket")
     private List<WorkedHours> workedHours;

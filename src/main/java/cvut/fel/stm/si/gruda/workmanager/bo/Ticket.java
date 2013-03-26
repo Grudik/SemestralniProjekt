@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -16,11 +17,20 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Ticket extends AbstractBusinessObject {
+    @OneToOne(mappedBy = "ticket")
+    private UploadedFile uploadedFile;
     
     private String name;
     private String note;
     private int avegageTime;
-    
+
+    public UploadedFile getUploadedFile() {
+        return uploadedFile;
+    }
+
+    public void setUploadedFile(UploadedFile uploadedFile) {
+        this.uploadedFile = uploadedFile;
+    }
     @OneToMany(mappedBy = "parent")
     private List<Ticket> tickets;
     

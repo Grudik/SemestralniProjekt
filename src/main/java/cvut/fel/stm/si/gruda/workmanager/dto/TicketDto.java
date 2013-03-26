@@ -20,12 +20,10 @@ public class TicketDto extends AbstractDto {
     private List<Long> workOnTickets;
     private Long parent;
     private Long project;
+    private Long uploadedFile;
 
-    public TicketDto() {
-    }
-
-    public TicketDto(Long id, String name, String note, int avegageTime, List<Long> tickets, List<Long> workedHours, List<Long> workOnTickets, Long parent, Long project) {
-        this.id = id;
+    public TicketDto(String name, String note, int avegageTime, List<Long> tickets, List<Long> workedHours, List<Long> workOnTickets, Long parent, Long project, Long uploadedFile, Long id) {
+        super(id);
         this.name = name;
         this.note = note;
         this.avegageTime = avegageTime;
@@ -34,6 +32,15 @@ public class TicketDto extends AbstractDto {
         this.workOnTickets = workOnTickets;
         this.parent = parent;
         this.project = project;
+        this.uploadedFile = uploadedFile;
+    }
+
+    public Long getUploadedFile() {
+        return uploadedFile;
+    }
+
+    public void setUploadedFile(Long uploadedFile) {
+        this.uploadedFile = uploadedFile;
     }
 
     public String getName() {

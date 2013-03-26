@@ -14,22 +14,28 @@ import javax.persistence.OneToMany;
  * @author Grudik-stolni
  */
 @Entity
-public class Project extends AbstractBusinessObject  {
-    
-    @OneToMany(mappedBy = "project")
-    private List<Ticket> tickets;
-    
-    @OneToMany(mappedBy = "project")
-    private List<WorkOnProject> workOnProjects;
-    
-    @OneToMany(mappedBy = "project")
-    private List<OtherCosts> otherCosts;
-    
+public class Project extends AbstractBusinessObject {
+
     private String name;
     private String note;
-    
+    @OneToMany(mappedBy = "project")
+    private List<UploadedFile> uploadedFiles;
+    @OneToMany(mappedBy = "project")
+    private List<Ticket> tickets;
+    @OneToMany(mappedBy = "project")
+    private List<WorkOnProject> workOnProjects;
+    @OneToMany(mappedBy = "project")
+    private List<OtherCosts> otherCosts;
     @ManyToOne
     private Customer customer;
+
+    public List<UploadedFile> getUploadedFiles() {
+        return uploadedFiles;
+    }
+
+    public void setUploadedFiles(List<UploadedFile> uploadedFiles) {
+        this.uploadedFiles = uploadedFiles;
+    }
 
     public Customer getCustomer() {
         return customer;
@@ -38,7 +44,7 @@ public class Project extends AbstractBusinessObject  {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-    
+
     public List<Ticket> getTickets() {
         return tickets;
     }
@@ -78,9 +84,4 @@ public class Project extends AbstractBusinessObject  {
     public void setNote(String note) {
         this.note = note;
     }
-    
-    
-    
-    
-    
 }

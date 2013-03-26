@@ -16,21 +16,28 @@ public class ProjectDto extends AbstractDto{
     
     private Long customer;
     
+    private List<Long> uploadedFiles;
     private List<Long> tickets;
     private List<Long> workOnProjects;
     private List<Long> otherCosts;
 
-    public ProjectDto() {
-    }
-
-    public ProjectDto(Long id, String name, String note, Long customer, List<Long> tickets, List<Long> workOnProjects, List<Long> otherCosts) {
-        this.id = id;
+    public ProjectDto(String name, String note, Long customer, List<Long> uploadedFiles, List<Long> tickets, List<Long> workOnProjects, List<Long> otherCosts, Long id) {
+        super(id);
         this.name = name;
         this.note = note;
         this.customer = customer;
+        this.uploadedFiles = uploadedFiles;
         this.tickets = tickets;
         this.workOnProjects = workOnProjects;
         this.otherCosts = otherCosts;
+    }
+
+    public List<Long> getUploadedFiles() {
+        return uploadedFiles;
+    }
+
+    public void setUploadedFiles(List<Long> uploadedFiles) {
+        this.uploadedFiles = uploadedFiles;
     }
 
     public String getName() {

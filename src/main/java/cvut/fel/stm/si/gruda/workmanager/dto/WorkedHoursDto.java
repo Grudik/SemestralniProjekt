@@ -10,16 +10,17 @@ import java.util.Date;
  *
  * @author GrudikNTB
  */
-public class WorkedHoursDto extends AbstractDto{
-     private Date startTime;
-     private Date endTime;
-     private String note;
-     
+public class WorkedHoursDto extends AbstractDto {
+
+    private Date startTime;
+    private Date endTime;
+    private String note;
     private Long user;
     private Long ticket;
     private Long settlingTime;
+    private Long uploadedFile;
 
-    public WorkedHoursDto(Long id, Date startTime, Date endTime, String note, Long user, Long ticket, Long settlingTime) {
+    public WorkedHoursDto(Date startTime, Date endTime, String note, Long user, Long ticket, Long settlingTime, Long uploadedFile, Long id) {
         super(id);
         this.startTime = startTime;
         this.endTime = endTime;
@@ -27,6 +28,15 @@ public class WorkedHoursDto extends AbstractDto{
         this.user = user;
         this.ticket = ticket;
         this.settlingTime = settlingTime;
+        this.uploadedFile = uploadedFile;
+    }
+
+    public Long getUploadedFile() {
+        return uploadedFile;
+    }
+
+    public void setUploadedFile(Long uploadedFile) {
+        this.uploadedFile = uploadedFile;
     }
 
     public Date getStartTime() {

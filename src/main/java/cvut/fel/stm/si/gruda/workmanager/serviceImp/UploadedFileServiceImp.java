@@ -4,7 +4,7 @@
  */
 package cvut.fel.stm.si.gruda.workmanager.serviceImp;
 
-import cvut.fel.stm.si.gruda.workmanager.service.WorkOnProjectService;
+import cvut.fel.stm.si.gruda.workmanager.service.UploadedFileService;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,6 +12,6 @@ import org.springframework.stereotype.Component;
  * @author GrudikNTB
  */
 @Component
-public class WorkOnProjectServiceImp extends AbstractDataAccessServiceImp implements WorkOnProjectService{
+public class UploadedFileServiceImp extends AbstractDataAccessServiceImp implements UploadedFileService{
     
 }

@@ -5,11 +5,13 @@
 package cvut.fel.stm.si.gruda.workmanager.serviceImp;
 
 import cvut.fel.stm.si.gruda.workmanager.service.OtherCostsService;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author GrudikNTB
  */
+@Component
 public class OtherCostsServiceImp extends AbstractDataAccessServiceImp implements OtherCostsService {
     
 }

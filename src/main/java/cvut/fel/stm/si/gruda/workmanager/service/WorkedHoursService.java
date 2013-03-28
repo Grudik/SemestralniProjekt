@@ -4,10 +4,13 @@
  */
 package cvut.fel.stm.si.gruda.workmanager.service;
 
+import org.springframework.transaction.annotation.Transactional;
+
 /**
  *
  * @author GrudikNTB
  */
+@Transactional
 public interface WorkedHoursService {
     
 }

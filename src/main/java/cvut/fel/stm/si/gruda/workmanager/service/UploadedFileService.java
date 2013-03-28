@@ -11,6 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
  * @author GrudikNTB
  */
 @Transactional
-public interface WorkOnProjectService {
+public interface UploadedFileService {
     
 }

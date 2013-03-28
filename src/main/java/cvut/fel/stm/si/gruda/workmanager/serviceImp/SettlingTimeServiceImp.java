@@ -5,11 +5,13 @@
 package cvut.fel.stm.si.gruda.workmanager.serviceImp;
 
 import cvut.fel.stm.si.gruda.workmanager.service.SettlingTimeService;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author GrudikNTB
  */
+@Component
 public class SettlingTimeServiceImp extends AbstractDataAccessServiceImp implements SettlingTimeService{
     
 }

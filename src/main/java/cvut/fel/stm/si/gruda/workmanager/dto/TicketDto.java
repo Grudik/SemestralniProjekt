@@ -14,7 +14,7 @@ public class TicketDto extends AbstractDto {
 
     private String name;
     private String note;
-    private int avegageTime;
+    private int averageTime;
     private List<Long> tickets;
     private List<Long> workedHours;
     private List<Long> workOnTickets;
@@ -22,11 +22,11 @@ public class TicketDto extends AbstractDto {
     private Long project;
     private Long uploadedFile;
 
-    public TicketDto(String name, String note, int avegageTime, List<Long> tickets, List<Long> workedHours, List<Long> workOnTickets, Long parent, Long project, Long uploadedFile, Long id) {
+    public TicketDto(String name, String note, int averageTime, List<Long> tickets, List<Long> workedHours, List<Long> workOnTickets, Long parent, Long project, Long uploadedFile, Long id) {
         super(id);
         this.name = name;
         this.note = note;
-        this.avegageTime = avegageTime;
+        this.averageTime = averageTime;
         this.tickets = tickets;
         this.workedHours = workedHours;
         this.workOnTickets = workOnTickets;
@@ -59,12 +59,12 @@ public class TicketDto extends AbstractDto {
         this.note = note;
     }
 
-    public int getAvegageTime() {
-        return avegageTime;
+    public int getAverageTime() {
+        return averageTime;
     }
 
-    public void setAvegageTime(int avegageTime) {
-        this.avegageTime = avegageTime;
+    public void setAverageTime(int averageTime) {
+        this.averageTime = averageTime;
     }
 
     public List<Long> getTickets() {

@@ -5,11 +5,13 @@
 package cvut.fel.stm.si.gruda.workmanager.serviceImp;
 
 import cvut.fel.stm.si.gruda.workmanager.dao.GenericDao;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author grudapav
  */
+@Component
 public class AbstractDataAccessServiceImp {
     protected GenericDao genericDao;
     

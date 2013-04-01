@@ -15,17 +15,18 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface TicketService {
     
-    public TicketDto getTicket(Long ticketId);
     public Long addTicket(String name, String note, int averageTime, Long parent, Long project, Long uploadedFile);
     public boolean removeTicket(Long ticketId);
+    public boolean setUserWorkOnTicket(Long userId,Long ticketId);
+    public boolean unSetUserWorkOnTicket(Long userId,Long ticketId);
+    
+    @Transactional(readOnly=true)    
+    public TicketDto getTicket(Long ticketId);
     @Transactional(readOnly=true)
     public List<TicketDto> getAllTickets();
     @Transactional(readOnly=true)
     public List<TicketDto> getAllTicketsByProjectId(Long projectId);
     @Transactional(readOnly=true)
     public List<TicketDto> getAllTicketsByUserId(Long userId);
-    public boolean addUserWorkOnTicket(Long userId,Long ticketId);
-    public boolean removeUserWorkOnTicket(Long userId,Long ticketId);
             
-    
 }

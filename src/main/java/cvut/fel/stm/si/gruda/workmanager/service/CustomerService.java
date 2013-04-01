@@ -17,12 +17,11 @@ import org.springframework.transaction.annotation.Transactional;
 public interface CustomerService {
     
     public Long addCustomer(String name, String surname, String email, String phone, String note);
-    public CustomerDto getCustomer(Long customerId);
     public boolean removeCustomer(Long customerId);
+    
+    @Transactional(readOnly=true)
+    public CustomerDto getCustomer(Long customerId);
     @Transactional(readOnly=true)
     public List<CustomerDto> getAllCustomers();
-    @Transactional(readOnly=true)
-    public List<ProjectDto> getAllProjectsByCustomerId(Long customerId);
-    
-    
+
 }

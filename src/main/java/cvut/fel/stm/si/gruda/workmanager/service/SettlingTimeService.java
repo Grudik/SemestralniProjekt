@@ -16,9 +16,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface SettlingTimeService {
     
-    public SettlingTimeDto getSettlingTime(Long settlingTimeId);
     public Long addSettlingTime(List<Long> otherCosts, Date settlingTime, List<Long> workedHours);
     public boolean removeSettlingTime(Long settlingTimeId);
+    
+    @Transactional(readOnly=true)
+    public SettlingTimeDto getSettlingTime(Long settlingTimeId);
     @Transactional(readOnly=true)
     public List<SettlingTimeDto> getAllSettlingTime();
 

@@ -15,9 +15,12 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public interface OtherCostsService {
-    public OtherCostsDto getOtherCosts(Long otherCostsServiceId);
+    
     public Long addOtherCosts(Date time, int value, String name, String note, Long user, Long settlingTime, Long project);
     public boolean removeOtherCosts(Long otherCostsId);
+    
+    @Transactional(readOnly=true)
+    public OtherCostsDto getOtherCosts(Long otherCostsServiceId);
     @Transactional(readOnly=true)
     public List<OtherCostsDto> getAllOtherCosts();
     @Transactional(readOnly=true)

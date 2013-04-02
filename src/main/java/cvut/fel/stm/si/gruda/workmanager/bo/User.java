@@ -4,10 +4,12 @@
  */
 package cvut.fel.stm.si.gruda.workmanager.bo;
 
+import cvut.fel.stm.si.gruda.workmanager.provider.HashProvider;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -15,27 +17,37 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class User extends AbstractBusinessObject {
-    @OneToMany(mappedBy = "user")
-    private List<OtherCosts> otherCosts;
-
-    @OneToMany(mappedBy = "user")
-    private List<WorkOnProject> workOnProjects;
     
-    @OneToMany(mappedBy = "user")
-    private List<WorkOnTicket> workOtTickets;
-    
-    @OneToMany(mappedBy = "user")
-    private List<WorkedHours> workedHours;
-      
     private String name;
     private String surname;
     private String login;
     private String email;
-    private String password;
     private String phone;
- 
+    
+    @Autowired
+    private transient HashProvider hashProvider;
     @Column(length = 40, nullable = false)
     private String salt;
+    @Column(length=40, nullable = false)
+    private String password; 
+    
+    @OneToMany(mappedBy = "user")
+    private List<OtherCosts> otherCosts;
+    @OneToMany(mappedBy = "user")
+    private List<WorkOnProject> workOnProjects;    
+    @OneToMany(mappedBy = "user")
+    private List<WorkOnTicket> workOtTickets;    
+    @OneToMany(mappedBy = "user")
+    private List<WorkedHours> workedHours;
+    
+    
+    public HashProvider getHashProvider() {
+        return hashProvider;
+    }
+
+    public void setHashProvider(HashProvider hashProvider) {
+        this.hashProvider = hashProvider;
+    }
 
     public List<OtherCosts> getOtherCosts() {
         return otherCosts;
@@ -106,7 +118,8 @@ public class User extends AbstractBusinessObject {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.salt = hashProvider.computeHash(System.nanoTime() + "");
+        this.password = hashProvider.computeHash(password + salt);
     }
 
     public String getPhone() {
@@ -123,6 +136,13 @@ public class User extends AbstractBusinessObject {
 
     public void setSalt(String salt) {
         this.salt = salt;
+    }
+    
+    public boolean hasPassword(String password){
+        if(hashProvider.computeHash(password + salt).equals(this.password)){
+            return true;
+        }
+        return false;
     }
     
 }

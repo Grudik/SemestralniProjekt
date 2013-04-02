@@ -4,7 +4,9 @@
  */
 package cvut.fel.stm.si.gruda.workmanager.serviceImp;
 
+import cvut.fel.stm.si.gruda.workmanager.dto.CustomerDto;
 import cvut.fel.stm.si.gruda.workmanager.service.CustomerService;
+import java.util.List;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,5 +15,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class CustomerServiceImp extends AbstractDataAccessServiceImp implements CustomerService {
+
+
     
 }

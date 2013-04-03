@@ -78,15 +78,6 @@ public class Ticket extends AbstractBusinessObject {
         this.parent = parent;
     }
 
-    public List<WorkOnTicket> getWorkOnTicket() {
-        return workOnTickets;
-    }
-
-    public void setWorkOnTicket(List<WorkOnTicket> workOnTicket) {
-        this.workOnTickets = workOnTicket;
-    }
-    
-
     public List<WorkedHours> getWorkedHours() {
         return workedHours;
     }

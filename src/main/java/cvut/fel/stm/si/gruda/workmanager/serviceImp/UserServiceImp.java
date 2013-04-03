@@ -22,7 +22,7 @@ public class UserServiceImp extends AbstractDataAccessServiceImp implements User
 
     @Override
     public Long addUser(String name, String surname, String login, String email, String password, String phone) {
-        
+
         User u = new User();
         u.setName(name);
         u.setSurname(surname);
@@ -31,30 +31,53 @@ public class UserServiceImp extends AbstractDataAccessServiceImp implements User
         u.setPhone(phone);
         u.setHashProvider(new SHA1Provider());
         u.setPassword(password);
-        
+
         return getGenericDao().saveOrUpdate(u).getId();
     }
 
     @Override
     public void deleteUser(Long userId) {
+
         getGenericDao().removeById(userId, User.class);
+
     }
 
     @Override
     public UserDto getUserById(Long userId) {
+
         User u = getGenericDao().getById(userId, User.class);
-        return new UserDto(userId, u.getName(), u.getSurname(),u.getEmail(), u.getLogin(), u.getPassword(), u.getPhone(), DtoTransformerHelper.getIdentifiers(u.getOtherCosts()), DtoTransformerHelper.getIdentifiers(u.getWorkOnProjects()), DtoTransformerHelper.getIdentifiers(u.getWorkOtTickets()), DtoTransformerHelper.getIdentifiers(u.getWorkedHours()));
+        return transformEntityToDto(u);
+
     }
 
     @Override
     public List<UserDto> getAllUsers() {
+        
         List<User> users = getGenericDao().getAll(User.class);
         List<UserDto> personDtos = new ArrayList<UserDto>();
-        
-        for(User u : users) {
-            personDtos.add(new UserDto(u.getId(), u.getName(), u.getSurname(),u.getEmail(), u.getLogin(), u.getPassword(), u.getPhone(), DtoTransformerHelper.getIdentifiers(u.getOtherCosts()), DtoTransformerHelper.getIdentifiers(u.getWorkOnProjects()), DtoTransformerHelper.getIdentifiers(u.getWorkOtTickets()), DtoTransformerHelper.getIdentifiers(u.getWorkedHours())));
+
+        for (User u : users) {
+            personDtos.add(transformEntityToDto(u));
         }
         return personDtos;
     }
-    
+
+    private UserDto transformEntityToDto(User u) {
+
+        UserDto uDto = new UserDto();
+
+        uDto.setId(u.getId());
+        uDto.setName(u.getName());
+        uDto.setSurname(u.getSurname());
+        uDto.setEmail(u.getEmail());
+        uDto.setLogin(u.getLogin());
+        uDto.setPassword(u.getPassword());
+        uDto.setPhone(u.getPhone());
+        uDto.setWorkOnProjects(DtoTransformerHelper.getIdentifiers(u.getWorkOnProjects()));
+        uDto.setWorkOtTickets(DtoTransformerHelper.getIdentifiers(u.getWorkOtTickets()));
+        uDto.setWorkedHours(DtoTransformerHelper.getIdentifiers(u.getWorkedHours()));
+        uDto.setOtherCosts(DtoTransformerHelper.getIdentifiers(u.getOtherCosts()));
+
+        return uDto;
+    }
 }

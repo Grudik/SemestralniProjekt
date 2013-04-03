@@ -21,6 +21,9 @@ public class ProjectDto extends AbstractDto{
     private List<Long> workOnProjects;
     private List<Long> otherCosts;
 
+    public ProjectDto() {
+    }
+
     public ProjectDto(String name, String note, Long customer, List<Long> uploadedFiles, List<Long> tickets, List<Long> workOnProjects, List<Long> otherCosts, Long id) {
         super(id);
         this.name = name;

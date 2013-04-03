@@ -20,7 +20,7 @@ public interface OtherCostsService {
     public boolean removeOtherCosts(Long otherCostsId);
     
     @Transactional(readOnly=true)
-    public OtherCostsDto getOtherCosts(Long otherCostsServiceId);
+    public OtherCostsDto getOtherCosts(Long otherCostsId);
     @Transactional(readOnly=true)
     public List<OtherCostsDto> getAllOtherCosts();
     @Transactional(readOnly=true)

@@ -35,6 +35,10 @@ public class TicketDto extends AbstractDto {
         this.uploadedFile = uploadedFile;
     }
 
+    public TicketDto() {
+        
+    }
+
     public Long getUploadedFile() {
         return uploadedFile;
     }

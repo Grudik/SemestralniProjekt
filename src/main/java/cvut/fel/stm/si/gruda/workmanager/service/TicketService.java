@@ -17,8 +17,8 @@ public interface TicketService {
     
     public Long addTicket(String name, String note, int averageTime, Long parent, Long project, Long uploadedFile);
     public boolean removeTicket(Long ticketId);
-    public boolean setUserWorkOnTicket(Long userId,Long ticketId);
-    public boolean unSetUserWorkOnTicket(Long userId,Long ticketId);
+//    public boolean setUserWorkOnTicket(Long userId,Long ticketId);
+//    public boolean unSetUserWorkOnTicket(Long userId,Long ticketId);
     
     @Transactional(readOnly=true)    
     public TicketDto getTicket(Long ticketId);

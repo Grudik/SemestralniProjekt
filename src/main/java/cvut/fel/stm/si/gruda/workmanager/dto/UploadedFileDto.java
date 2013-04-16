@@ -27,6 +27,10 @@ public class UploadedFileDto extends AbstractDto {
         this.workedHours = workedHours;
     }
 
+    public UploadedFileDto() {
+        
+    }
+
     public String getName() {
         return name;
     }

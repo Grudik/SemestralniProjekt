@@ -21,6 +21,10 @@ public class WorkOnProjectDto extends AbstractDto {
         this.project = project;
     }
 
+    public WorkOnProjectDto() {
+  
+    }
+
     public boolean isOwnerOfProject() {
         return ownerOfProject;
     }
@@ -45,4 +49,6 @@ public class WorkOnProjectDto extends AbstractDto {
     public void setProject(Long project) {
         this.project = project;
     }
+    
+    
 }

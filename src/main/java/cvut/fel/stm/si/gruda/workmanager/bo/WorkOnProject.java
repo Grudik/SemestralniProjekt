@@ -23,7 +23,6 @@ public class WorkOnProject extends AbstractBusinessObject {
     @ManyToOne
     private Project project;
 
-
     public Project getProject() {
         return project;
     }
@@ -48,7 +47,4 @@ public class WorkOnProject extends AbstractBusinessObject {
     public void setOwner(boolean owner) {
         this.ownerOfProject = owner;
     }
-    
-    
-    
 }

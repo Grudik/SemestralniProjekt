@@ -10,6 +10,7 @@ import cvut.fel.stm.si.gruda.workmanager.bo.UploadedFile;
 import cvut.fel.stm.si.gruda.workmanager.dto.TicketDto;
 import cvut.fel.stm.si.gruda.workmanager.helper.DtoTransformerHelper;
 import cvut.fel.stm.si.gruda.workmanager.service.TicketService;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +23,7 @@ public class TicketServiceImp extends AbstractDataAccessServiceImp implements Ti
 
     @Override
     public Long addTicket(String name, String note, int averageTime, Long parent, Long project, Long uploadedFile) {
-        
+
         Ticket t = new Ticket();
         t.setAvegageTime(averageTime);
         t.setName(name);
@@ -33,40 +34,52 @@ public class TicketServiceImp extends AbstractDataAccessServiceImp implements Ti
         t.setProject(pro);
         UploadedFile uf = genericDao.getById(uploadedFile, UploadedFile.class);
         t.setUploadedFile(uf);
-        
+
         return genericDao.saveOrUpdate(t).getId();
     }
 
     @Override
     public boolean removeTicket(Long ticketId) {
-        
+
         genericDao.removeById(ticketId, Ticket.class);
-        return true;        
-                
+        return true;
+
     }
 
     @Override
     public TicketDto getTicket(Long ticketId) {
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        return transformEntityToDto(genericDao.getById(ticketId, Ticket.class));
+
     }
 
     @Override
     public List<TicketDto> getAllTickets() {
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        List<Ticket> ts = genericDao.getAll(Ticket.class);
+        List<TicketDto> tsDto = new ArrayList<TicketDto>();
+
+        for (Ticket t : ts) {
+            tsDto.add(transformEntityToDto(t));
+        }
+        return tsDto;
     }
 
     @Override
     public List<TicketDto> getAllTicketsByProjectId(Long projectId) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        List<Ticket> ts = genericDao.getAll(Ticket.class);
+        List<TicketDto> tsDto = new ArrayList<TicketDto>();
+
+        for (Ticket t : ts) {
+            if (t.getProject().getId() == projectId) {
+                tsDto.add(transformEntityToDto(t));
+            }
+        }
+        return tsDto;
     }
 
-    @Override
-    public List<TicketDto> getAllTicketsByUserId(Long userId) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-    
     private TicketDto transformEntityToDto(Ticket t) {
-        
+
         TicketDto tDto = new TicketDto();
         tDto.setAverageTime(t.getAvegageTime());
         tDto.setId(t.getId());
@@ -78,10 +91,9 @@ public class TicketServiceImp extends AbstractDataAccessServiceImp implements Ti
         tDto.setUploadedFile(t.getUploadedFile().getId());
         tDto.setWorkOnTickets(DtoTransformerHelper.getIdentifiers(t.getWorkOnTickets()));
         tDto.setWorkedHours(DtoTransformerHelper.getIdentifiers(t.getWorkedHours()));
-        
-        
+
+
         return tDto;
-        
+
     }
-    
 }

@@ -21,6 +21,10 @@ public class WorkOnTicketDto extends AbstractDto {
         this.ticket = ticket;
     }
 
+    public WorkOnTicketDto() {
+        
+    }
+
     public boolean isOwnerOfTicket() {
         return ownerOfTicket;
     }

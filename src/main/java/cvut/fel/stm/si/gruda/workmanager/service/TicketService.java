@@ -26,7 +26,7 @@ public interface TicketService {
     public List<TicketDto> getAllTickets();
     @Transactional(readOnly=true)
     public List<TicketDto> getAllTicketsByProjectId(Long projectId);
-    @Transactional(readOnly=true)
-    public List<TicketDto> getAllTicketsByUserId(Long userId);
+//    @Transactional(readOnly=true)
+//    public List<TicketDto> getAllTicketsByUserId(Long userId);
             
 }

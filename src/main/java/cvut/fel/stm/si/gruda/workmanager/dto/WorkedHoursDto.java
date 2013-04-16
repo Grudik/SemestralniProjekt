@@ -31,6 +31,10 @@ public class WorkedHoursDto extends AbstractDto {
         this.uploadedFile = uploadedFile;
     }
 
+    public WorkedHoursDto() {
+        
+    }
+
     public Long getUploadedFile() {
         return uploadedFile;
     }

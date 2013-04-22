@@ -36,9 +36,12 @@ public class WorkedHoursServiceImp extends AbstractDataAccessServiceImp implemen
             wh.setUploadedFile(genericDao.getById(uploadedFile, UploadedFile.class));
         }
         wh.setStartTime(startTime);
-        wh.setTicket(genericDao.getById(ticket, Ticket.class));
-        wh.setUser(genericDao.getById(user, User.class));
-        
+        if (ticket != null) {
+            wh.setTicket(genericDao.getById(ticket, Ticket.class));
+        }
+        if (user != null) {
+           wh.setUser(genericDao.getById(user, User.class)); 
+        }
         return genericDao.saveOrUpdate(wh).getId();
     }
 
@@ -112,19 +115,20 @@ public class WorkedHoursServiceImp extends AbstractDataAccessServiceImp implemen
         whDto.setEndTime(wh.getEndTime());
         whDto.setId(wh.getId());
         whDto.setNote(wh.getNote());
+        whDto.setStartTime(wh.getStartTime());
+        
         if (wh.getSettlingTime() != null) {
             whDto.setSettlingTime(wh.getSettlingTime().getId());
         }
         if (wh.getTicket() != null) {
             whDto.setTicket(wh.getTicket().getId());
         }
-        whDto.setStartTime(wh.getStartTime());
         if (wh.getUploadedFile() != null) {
             whDto.setUploadedFile(wh.getUploadedFile().getId());
         }
-        whDto.setUser(wh.getUser().getId());
-        
+        if (wh.getUser() != null ) {
+            whDto.setUser(wh.getUser().getId());
+        }
         return whDto;
-        
     }
 }

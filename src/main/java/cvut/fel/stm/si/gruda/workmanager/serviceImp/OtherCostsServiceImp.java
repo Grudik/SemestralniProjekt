@@ -32,8 +32,12 @@ public class OtherCostsServiceImp extends AbstractDataAccessServiceImp implement
         oc.setValue(value);
         oc.setName(name);
         oc.setNote(note);
-        oc.setUser(genericDao.getById(user, User.class));
-        oc.setProject(genericDao.getById(project, Project.class));
+        if (user != null) {
+            oc.setUser(genericDao.getById(user, User.class));
+        }
+        if (project != null) {
+            oc.setProject(genericDao.getById(project, Project.class));
+        }
         if(settlingTime != null) {
             oc.setSettlingTime(genericDao.getById(settlingTime, SettlingTime.class));
         }
@@ -90,10 +94,16 @@ public class OtherCostsServiceImp extends AbstractDataAccessServiceImp implement
         ocDto.setId(oc.getId());
         ocDto.setName(oc.getName());
         ocDto.setNote(oc.getNote());
-        ocDto.setProject(oc.getProject().getId());
-        ocDto.setSettlingTime(oc.getSettlingTime().getId());
+        if (oc.getProject() != null) {
+            ocDto.setProject(oc.getProject().getId());
+        }
+        if (oc.getSettlingTime() != null) {
+            ocDto.setSettlingTime(oc.getSettlingTime().getId());
+        }
         ocDto.setTime(oc.getTime());
-        ocDto.setUser(oc.getUser().getId());
+        if (oc.getUser() != null) {
+            ocDto.setUser(oc.getUser().getId());
+        }
         ocDto.setValue(oc.getValue());
         
         return ocDto;

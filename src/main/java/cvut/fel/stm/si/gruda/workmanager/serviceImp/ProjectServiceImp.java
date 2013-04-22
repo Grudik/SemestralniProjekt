@@ -25,7 +25,10 @@ public class ProjectServiceImp extends AbstractDataAccessServiceImp implements P
         
         Project p = new Project();
         
-        p.setCustomer(genericDao.getById(customer, Customer.class));
+        if (customer != null) {
+            p.setCustomer(genericDao.getById(customer, Customer.class));
+        } 
+        
         p.setName(name);
         p.setNote(note);
         
@@ -77,7 +80,9 @@ public class ProjectServiceImp extends AbstractDataAccessServiceImp implements P
         
         ProjectDto pDto = new ProjectDto();
         
-        pDto.setCustomer(p.getCustomer().getId());
+        if (p.getCustomer() != null) {
+            pDto.setCustomer(p.getCustomer().getId());
+        }
         pDto.setId(p.getId());
         pDto.setName(p.getName());
         pDto.setNote(p.getNote());

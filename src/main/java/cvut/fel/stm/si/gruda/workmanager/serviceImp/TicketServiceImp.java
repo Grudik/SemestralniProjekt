@@ -28,18 +28,18 @@ public class TicketServiceImp extends AbstractDataAccessServiceImp implements Ti
         t.setAvegageTime(averageTime);
         t.setName(name);
         t.setNote(note);
-        
+
         if (parent != null) {
             Ticket par = genericDao.getById(parent, Ticket.class);
             t.setParent(par);
         }
-
-        Project pro = genericDao.getById(project, Project.class);
-        t.setProject(pro);
-        
-        if(uploadedFile != null) {
+        if (project != null) {
+            Project pro = genericDao.getById(project, Project.class);
+            t.setProject(pro);
+        }
+        if (uploadedFile != null) {
             UploadedFile uf = genericDao.getById(uploadedFile, UploadedFile.class);
-        t.setUploadedFile(uf);
+            t.setUploadedFile(uf);
         }
 
         return genericDao.saveOrUpdate(t).getId();
@@ -92,10 +92,16 @@ public class TicketServiceImp extends AbstractDataAccessServiceImp implements Ti
         tDto.setId(t.getId());
         tDto.setName(t.getName());
         tDto.setNote(t.getNote());
-        tDto.setParent(t.getParent().getId());
-        tDto.setProject(t.getProject().getId());
+        if(t.getParent() != null) {
+            tDto.setParent(t.getParent().getId());
+        }
+        if (t.getProject() != null) {
+            tDto.setProject(t.getProject().getId());
+        }
+        if (t.getUploadedFile() != null) {
+            tDto.setUploadedFile(t.getUploadedFile().getId());
+        }
         tDto.setTickets(DtoTransformerHelper.getIdentifiers(t.getTickets()));
-        tDto.setUploadedFile(t.getUploadedFile().getId());
         tDto.setWorkOnTickets(DtoTransformerHelper.getIdentifiers(t.getWorkOnTickets()));
         tDto.setWorkedHours(DtoTransformerHelper.getIdentifiers(t.getWorkedHours()));
 

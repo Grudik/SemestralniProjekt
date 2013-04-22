@@ -25,8 +25,12 @@ public class WorkOnProjectServiceImp extends AbstractDataAccessServiceImp implem
         
         WorkOnProject wop = new WorkOnProject();
         wop.setOwner(owner);
-        wop.setUser(genericDao.getById(user, User.class));
-        wop.setProject(genericDao.getById(project, Project.class));
+        if (user != null) {
+            wop.setUser(genericDao.getById(user, User.class));
+        }
+        if (project != null) {
+            wop.setProject(genericDao.getById(project, Project.class));
+        }
 
         return genericDao.saveOrUpdate(wop).getId();
         
@@ -90,8 +94,12 @@ public class WorkOnProjectServiceImp extends AbstractDataAccessServiceImp implem
         
         wopDto.setId(wop.getId());
         wopDto.setOwnerOfProject(wop.isOwner());
-        wopDto.setProject(wop.getProject().getId());
-        wopDto.setUser(wop.getUser().getId());
+        if (wop.getProject() != null) {
+            wopDto.setProject(wop.getProject().getId());
+        }
+        if (wop.getUser() != null) {
+            wopDto.setUser(wop.getUser().getId());
+        }
         
         return wopDto;
     }

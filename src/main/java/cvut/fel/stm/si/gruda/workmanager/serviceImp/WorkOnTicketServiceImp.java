@@ -25,8 +25,13 @@ public class WorkOnTicketServiceImp extends AbstractDataAccessServiceImp impleme
         
         WorkOnTicket wot = new WorkOnTicket();
         wot.setOwner(ownerOfTicket);
-        wot.setTicket(genericDao.getById(ticket, Ticket.class));
-        wot.setUser(genericDao.getById(user, User.class));
+        if (ticket != null) {
+            wot.setTicket(genericDao.getById(ticket, Ticket.class));
+        }
+        if (user != null) {
+            wot.setUser(genericDao.getById(user, User.class));
+        }
+        
         
         return genericDao.saveOrUpdate(wot).getId();
     }
@@ -88,9 +93,12 @@ public class WorkOnTicketServiceImp extends AbstractDataAccessServiceImp impleme
         
         wotDto.setId(wot.getId());
         wotDto.setOwnerOfTicket(wot.isOwner());
-        wotDto.setTicket(wot.getTicket().getId());
-        wotDto.setUser(wot.getUser().getId());
-        
+        if (wot.getTicket() != null) {
+            wotDto.setTicket(wot.getTicket().getId());
+        }
+        if (wot.getUser() != null) {
+            wotDto.setUser(wot.getUser().getId());
+        }
         return wotDto;
         
     }

@@ -26,17 +26,22 @@ public class SettlingTimeServiceImp extends AbstractDataAccessServiceImp impleme
     public Long addSettlingTime(List<Long> otherCosts, Date settlingTime, List<Long> workedHours) {
 
         SettlingTime st = new SettlingTime();
-        List<OtherCosts> ocs = new ArrayList<OtherCosts>();
-        for (Long l : otherCosts) {
-            ocs.add(genericDao.getById(l, OtherCosts.class));
-        }
-        st.setOtherCosts(ocs);
         st.setSettlingTime(settlingTime);
-        List<WorkedHours> whs = new ArrayList<WorkedHours>();
-        for (Long l : workedHours) {
-            whs.add(genericDao.getById(l, WorkedHours.class));
+
+        if (otherCosts != null) {
+            List<OtherCosts> ocs = new ArrayList<OtherCosts>();
+            for (Long l : otherCosts) {
+                ocs.add(genericDao.getById(l, OtherCosts.class));
+                st.setOtherCosts(ocs);
+            }
         }
-        st.setWorkedHours(whs);
+        if (workedHours != null) {
+            List<WorkedHours> whs = new ArrayList<WorkedHours>();
+            for (Long l : workedHours) {
+                whs.add(genericDao.getById(l, WorkedHours.class));
+            }
+            st.setWorkedHours(whs);
+        }
         
         return genericDao.saveOrUpdate(st).getId();
 

@@ -19,76 +19,86 @@ import org.springframework.stereotype.Component;
  * @author GrudikNTB
  */
 @Component
-public class UploadedFileServiceImp extends AbstractDataAccessServiceImp implements UploadedFileService{
+public class UploadedFileServiceImp extends AbstractDataAccessServiceImp implements UploadedFileService {
 
     @Override
     public Long addUploadedFile(String name, String note, Byte[] file, Long project, Long ticket, Long workedHours) {
-        
+
         UploadedFile uf = new UploadedFile();
         uf.setName(name);
         uf.setNote(note);
         uf.setFile(file);
-        uf.setProject(genericDao.getById(project, Project.class));
-        uf.setTicket(genericDao.getById(ticket, Ticket.class));
-        uf.setWorkedHours(genericDao.getById(workedHours, WorkedHours.class));
-        
+        if (project != null) {
+            uf.setProject(genericDao.getById(project, Project.class));
+        }
+        if (ticket != null) {
+            uf.setTicket(genericDao.getById(ticket, Ticket.class));
+        }
+        if (workedHours != null) {
+            uf.setWorkedHours(genericDao.getById(workedHours, WorkedHours.class));
+        }
+
         return genericDao.saveOrUpdate(uf).getId();
     }
 
     @Override
     public boolean removeUploadedFile(Long fileId) {
-        
+
         genericDao.removeById(fileId, UploadedFile.class);
         return true;
     }
 
     @Override
     public UploadedFileDto getUploadedFile(Long fileId) {
-        
+
         return transformEntityToDto(genericDao.getById(fileId, UploadedFile.class));
-        
+
     }
 
     @Override
     public List<UploadedFileDto> getAllUploadedFiles() {
-        
+
         List<UploadedFile> ufs = genericDao.getAll(UploadedFile.class);
         List<UploadedFileDto> ufDtos = new ArrayList<UploadedFileDto>();
-        for(UploadedFile uf : ufs) {
+        for (UploadedFile uf : ufs) {
             ufDtos.add(transformEntityToDto(uf));
         }
         return ufDtos;
-        
+
     }
 
     @Override
     public List<UploadedFileDto> getAllUploadedFilesByProject(Long projectId) {
-        
+
         List<UploadedFile> ufs = genericDao.getAll(UploadedFile.class);
         List<UploadedFileDto> ufDtos = new ArrayList<UploadedFileDto>();
-        for(UploadedFile uf : ufs) {
+        for (UploadedFile uf : ufs) {
             if (uf.getProject().getId() == projectId) {
                 ufDtos.add(transformEntityToDto(uf));
             }
         }
         return ufDtos;
-        
+
     }
-    
+
     private UploadedFileDto transformEntityToDto(UploadedFile uf) {
-        
+
         UploadedFileDto ufDto = new UploadedFileDto();
         ufDto.setFile(uf.getFile());
         ufDto.setId(uf.getId());
         ufDto.setName(uf.getName());
         ufDto.setNote(uf.getNote());
-        ufDto.setProject(uf.getProject().getId());
-        ufDto.setTicket(uf.getTicket().getId());
-        ufDto.setWorkedHours(uf.getWorkedHours().getId());
-        
+        if (uf.getProject() != null) {
+            ufDto.setProject(uf.getProject().getId());
+        }
+        if (uf.getTicket() != null) {
+            ufDto.setTicket(uf.getTicket().getId());
+        }
+        if (uf.getWorkedHours() != null) {
+            ufDto.setWorkedHours(uf.getWorkedHours().getId());
+        }
+
         return ufDto;
-        
+
     }
-
-
 }

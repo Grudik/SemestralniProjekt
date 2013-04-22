@@ -5,6 +5,7 @@
 package cvut.fel.stm.si.gruda.workmanager.bo;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -18,13 +19,13 @@ public class Project extends AbstractBusinessObject {
 
     private String name;
     private String note;
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project",cascade= CascadeType.REMOVE)
     private List<UploadedFile> uploadedFiles;
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project",cascade= CascadeType.REMOVE)
     private List<Ticket> tickets;
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project",cascade= CascadeType.REMOVE)
     private List<WorkOnProject> workOnProjects;
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project",cascade= CascadeType.REMOVE)
     private List<OtherCosts> otherCosts;
     @ManyToOne
     private Customer customer;

@@ -28,12 +28,19 @@ public class TicketServiceImp extends AbstractDataAccessServiceImp implements Ti
         t.setAvegageTime(averageTime);
         t.setName(name);
         t.setNote(note);
-        Ticket par = genericDao.getById(parent, Ticket.class);
-        t.setParent(par);
+        
+        if (parent != null) {
+            Ticket par = genericDao.getById(parent, Ticket.class);
+            t.setParent(par);
+        }
+
         Project pro = genericDao.getById(project, Project.class);
         t.setProject(pro);
-        UploadedFile uf = genericDao.getById(uploadedFile, UploadedFile.class);
+        
+        if(uploadedFile != null) {
+            UploadedFile uf = genericDao.getById(uploadedFile, UploadedFile.class);
         t.setUploadedFile(uf);
+        }
 
         return genericDao.saveOrUpdate(t).getId();
     }

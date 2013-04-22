@@ -5,6 +5,7 @@
 package cvut.fel.stm.si.gruda.workmanager.bo;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -17,7 +18,7 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Ticket extends AbstractBusinessObject {
-    @OneToOne(mappedBy = "ticket")
+    @OneToOne(mappedBy = "ticket",cascade= CascadeType.REMOVE)
     private UploadedFile uploadedFile;
     
     private String name;
